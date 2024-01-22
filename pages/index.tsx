@@ -1,56 +1,74 @@
-import Container from "../components/container";
-import MoreStories from "../components/more-stories";
-import HeroPost from "../components/hero-post";
-import Intro from "../components/intro";
-import Layout from "../components/layout";
-import { getAllPosts } from "../lib/api";
 import Head from "next/head";
-import { CMS_NAME } from "../lib/constants";
-import Post from "../interfaces/post";
+
+// Components
+import Hero, { HeroDataInterface } from "../components/pages/home/hero";
+import Layout from "../components/global/layout";
+import FeaturesSection, {
+  FeautersSectionDataInterface,
+} from "../components/pages/home/features";
+import FeaturesOverviewSection, {
+  FeaturesOverviewData,
+  FeaturesOverviewItemsData,
+} from "../components/pages/home/features-overview";
+import ContentStructureSection, {
+  ContentStructureSectionDataInterface,
+} from "../components/pages/home/content-structure";
+
+// Content Json's
+import heroContent from "../contentrain/homehero/homehero.json";
+import featuresContent from "../contentrain/homefeatures/homefeatures.json";
+import featuresOverviewContent from "../contentrain/homefeaturesoverview/homefeaturesoverview.json";
+import featuresOverviewItems from "../contentrain/homefeaturesoverviewitems/homefeaturesoverviewitems.json";
+import contentStructureContent from "../contentrain/homecontentstructure/homecontentstructure.json";
+import collaborateTeamsContent from "../contentrain/homecollaborateteams/homecollaborateteams.json";
 
 type Props = {
-  allPosts: Post[];
+  heroData: HeroDataInterface;
+  featuresData: FeautersSectionDataInterface[];
+  featuresOverviewData: FeaturesOverviewData;
+  featuresOverviewItemsData: FeaturesOverviewItemsData[];
+  contentStructureData: ContentStructureSectionDataInterface;
+  collaborateTeamsData: ContentStructureSectionDataInterface;
 };
-
-export default function Index({ allPosts }: Props) {
-  const heroPost = allPosts[0];
-  const morePosts = allPosts.slice(1);
+export default function Index({
+  heroData,
+  featuresData,
+  featuresOverviewData,
+  featuresOverviewItemsData,
+  contentStructureData,
+  collaborateTeamsData,
+}: Props) {
   return (
     <>
-      <Layout>
-        <Head>
-          <title>{`Next.js Blog Example with ${CMS_NAME}`}</title>
-        </Head>
-        <Container>
-          <Intro />
-          {heroPost && (
-            <HeroPost
-              title={heroPost.title}
-              coverImage={heroPost.coverImage}
-              date={heroPost.date}
-              author={heroPost.author}
-              slug={heroPost.slug}
-              excerpt={heroPost.excerpt}
-            />
-          )}
-          {morePosts.length > 0 && <MoreStories posts={morePosts} />}
-        </Container>
-      </Layout>
+      <Head>
+        <title>{`Contentrain Next.js starter template`}</title>
+      </Head>
+      <div>
+        <Layout>
+          <Hero heroData={heroData} />
+          <FeaturesSection featuresData={featuresData} />
+          <ContentStructureSection contentStructure={contentStructureData} />
+          <FeaturesOverviewSection
+            featuresOverview={featuresOverviewData}
+            featuresOverviewItems={featuresOverviewItemsData}
+          />
+          <ContentStructureSection contentStructure={collaborateTeamsData} />
+        </Layout>
+      </div>
     </>
   );
 }
 
 export const getStaticProps = async () => {
-  const allPosts = getAllPosts([
-    "title",
-    "date",
-    "slug",
-    "author",
-    "coverImage",
-    "excerpt",
-  ]);
-
   return {
-    props: { allPosts },
+    props: {
+      featuresData: featuresContent,
+      heroData: heroContent[0],
+      featuresOverviewData: featuresOverviewContent[0],
+      featuresOverviewItemsData: featuresOverviewItems,
+      contentStructureData: contentStructureContent[0],
+      collaborateTeamsData: collaborateTeamsContent[0],
+    },
   };
 };
+

@@ -1,3 +1,81 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "Aeonik";
+  src: url("./fonts/Aeonik-Medium.ttf");
+}
+
+html {
+  @apply scroll-smooth;
+}
+body {
+  font-family: "Aeonik", sans-serif;
+  @apply text-secondary-600;
+}
+@layer base {
+  .main-navbar {
+    @apply fixed lg:relative w-0 h-0 right-0 top-0 rounded-b-full rounded-tl-full rounded overflow-hidden lg:overflow-visible flex flex-wrap lg:h-auto lg:w-auto lg:right-auto lg:top-auto lg:justify-center lg:flex-nowrap bg-white lg:bg-transparent ease-in-out duration-300 z-50;
+  }
+  .main-navbar__list {
+    @apply flex flex-wrap lg:flex-nowrap m-0 p-0 list-none self-start w-full lg:w-auto;
+  }
+
+  .main-navbar__item {
+    @apply flex w-full lg:w-auto relative;
+  }
+
+  .main-navbar__link {
+    @apply flex items-center px-6 py-3 text-lg lg:py-6 lg:px-4 lg:text-base font-medium w-full;
+  }
+
+  .main-navbar.shown {
+    @apply w-full h-screen rounded-none shadow-lg;
+  }
+  .text-body {
+    @apply text-gray-500;
+  }
+  .text-heading {
+    @apply text-gray-900;
+  }
+  /* * {
+    outline: none !important;
+  } */
+
+  .container {
+    @apply sm:mx-auto px-3;
+  }
+
+  .main-hero-bg {
+    background-image: url("/images/main-hero.svg");
+    background-position: center top;
+    background-size: var(--bg-size, auto);
+  }
+  .main-hero-bg & .half-lines {
+    background-image: url("/images/main-hero.svg");
+  }
+  .sm-hero-bg {
+    background-image: url("/images/sm-hero.svg");
+    background-position: center top;
+  }
+  .banner-bg {
+    background-image: url("/images/banner-bg.svg");
+    background-position: center top;
+    background-size: cover;
+  }
+  .social-links {
+    @apply flex list-none justify-center w-full;
+  }
+  .social-links__link {
+    @apply px-3 text-xs text-gray-400;
+  }
+
+  .share-links {
+    @apply flex list-none justify-center w-full;
+  }
+  .share-links__link {
+    @apply block p-2 text-xs text-gray-400 border mx-2 rounded-full;
+  }
+}
+
