@@ -1,5 +1,5 @@
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
-import { getPostBySlug } from "../lib/api";
+import { getAllPosts, getPostBySlug } from "../lib/api";
 import markdownToHtml from "../lib/markdownToHtml";
 import BlogDetailHero from "../components/pages/blog/detail/hero";
 import Layout from "../components/global/layout";
@@ -44,7 +44,7 @@ export default function UseCase({ data }) {
 }
 
 export async function getStaticProps({ params }: Params) {
-  const post = getPostBySlug("use-case", [
+  const post = getPostBySlug("use-case/contentrain-use-case", [
     "title",
     "slug",
     "author",

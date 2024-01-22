@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { RiArrowLeftLine, RiArrowRightLine } from "react-icons/ri";
 
 interface PaginationProps {
   currentPage: number;
@@ -40,8 +41,8 @@ const Pagination: React.FC<PaginationProps> = ({
           title="Previous Page"
         >
           <span className="sr-only">Previous Page</span>
-          <span style={{ "--size": "20px" }}>
-            {/* <nuxt-icon className="-m-1" name="chevron-left" /> */}
+          <span>
+            <RiArrowLeftLine size={20}></RiArrowLeftLine>
           </span>
         </Link>
       )}
@@ -68,8 +69,9 @@ const Pagination: React.FC<PaginationProps> = ({
           title="Next Page"
         >
           <span className="sr-only">Next Page</span>
-          <span style={{ "--size": "20px" }}>
-            {/* <nuxt-icon className="-m-1" name="chevron-right" /> */}
+
+          <span>
+            <RiArrowRightLine size={20} />
           </span>
         </Link>
       )}
