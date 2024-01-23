@@ -65,7 +65,7 @@ export async function getStaticProps({ params }: Params) {
     props: {
       data: {
         ...post,
-        content,
+        content:content,
       },
     },
   };
