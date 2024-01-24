@@ -28,12 +28,21 @@ const BlogHero = ({ blogHero, blogCategories }: BlogHeroProps) => {
         </p>
         <div className="w-full" />
         <div className="flex md:justify-center mx-auto max-w-full border rounded-full p-1 bg-white text-sm text-gray-600 font-normal overflow-auto">
+          <Link
+            key={`category-all-posts`}
+            href={`/blog`}
+            title={`All Posts`}
+            className={geLinkClassNames()("/blog")}
+            scroll={false}
+          >
+            All Posts
+          </Link>
           {blogCategories.map((category, i) => (
             <Link
               key={`category-${i}`}
-              href={category.slug}
+              href={`/blog/${category.slug}`}
               title={category.name}
-              className={geLinkClassNames()(category.slug)}
+              className={geLinkClassNames()(`/blog/${category.slug}`)}
             >
               {category.name}
             </Link>

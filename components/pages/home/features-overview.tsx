@@ -71,7 +71,7 @@ const FeaturesOverviewSection = ({
                   ></AppButton>
                   <div className="border-t border-l border-r rounded-t-xl h-[230px] overflow-hidden mt-6">
                     <img
-                      src={item.imagesrc}
+                      src={item.imagesrc.split("public")[1]}
                       alt={item.imagealt}
                       height="200"
                       width="100%"

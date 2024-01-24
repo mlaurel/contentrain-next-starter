@@ -71,7 +71,7 @@ export const getStaticProps = async () => {
       author: authorContent.find((author) => author.ID === post.author),
     }
   })
-    
+
   return {
     props: {
       data: extendedPosts,

@@ -22,13 +22,6 @@ const BlogPostsList: React.FC<BlogPostsListProps> = ({ data }) => {
 
   const totalPages = Math.ceil(data?.length / postsPerPage);
 
-  const handlePageChange = (page: number) => {
-    router.push({
-      pathname: router.pathname,
-      query: { ...router.query, page },
-    });
-  };
-
   return (
     <div className="container py-10 md:pb-24">
       <div className="flex flex-wrap">
@@ -56,12 +49,11 @@ const BlogPostsList: React.FC<BlogPostsListProps> = ({ data }) => {
           </div>
         ))}
       </div>
-      {/* <Pagination
+      <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
         pagesToShow={pagesToShow}
-        onPageChange={handlePageChange}
-      /> */}
+      />
     </div>
   );
 };

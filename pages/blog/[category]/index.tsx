@@ -65,15 +65,13 @@ export const getStaticProps = async ({ params }) => {
   const activeCategory: IBlogCategories = allCategories.find(
     (category) => category.slug === params.category
   );
-  const filteredPosts: IBlogExtended[] = allPosts
+  const filteredPosts = allPosts
     .filter((post) => post.category === activeCategory.ID)
     .map((post) => {
       return {
         ...post,
-        category: blogCategoriesContent.find(
-          (category) => category.ID === post.category
-        ),
         author: authorContent.find((author) => author.ID === post.author),
+        category: activeCategory,
       };
     });
   return {
@@ -86,35 +84,19 @@ export const getStaticProps = async ({ params }) => {
     },
   };
 };
+
 export const getStaticPaths = async () => {
   const allPosts = getAllPosts("blog");
-// console.log(allPosts)
-  const paths = allPosts.map((post) => ({
-    params: {
-      category: allCategories.find((category) => category.ID === post.category)
-        .slug,
-    },
-  }));
-  console.log(paths)
   return {
-    paths,
+    paths: allPosts?.map((post) => {
+      return {
+        params: {
+          category: allCategories.find(
+            (category) => category.ID === post.category
+          ).slug,
+        },
+      };
+    }),
     fallback: false,
   };
-}
-
-
-
-// export const getStaticPaths = async () => {
-//   const allPosts = getAllPosts("blog");
-
-//   const paths = allPosts.map((post) => ({
-//     params: {
-//       category: allCategories.find((category) => category.ID === post.category)
-//         .slug,
-//     },
-//   }));
-//   return {
-//     paths,
-//     fallback: false,
-//   };
-// };
+};
