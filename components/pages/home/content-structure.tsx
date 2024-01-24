@@ -1,19 +1,10 @@
 // components/ContentStructureSection.tsx
 
+import { IHomeContentStructure } from "../../../interfaces/contentrain";
 import AppButton from "../../global/app-button";
 
-export interface ContentStructureSectionDataInterface {
-  ID: string;
-  title: string;
-  subtitle: string;
-  description: string;
-  imagesrc: string;
-  imagealt: string;
-  buttonlabel: string;
-  buttonlink: string;
-}
 type ContentStructureSectionProps = {
-  contentStructure: ContentStructureSectionDataInterface;
+  contentStructure: IHomeContentStructure;
 };
 
 const ContentStructureSection = ({

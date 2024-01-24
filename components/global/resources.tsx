@@ -1,14 +1,12 @@
 // components/ResourcesSection.tsx
 
 import Link from "next/link";
-import {
-  ResourcesDataInterface,
-  ResourcesItemsDataInterface,
-} from "../../pages/blog";
+
 import { Ri4KLine } from "react-icons/ri";
+import { IResourcesItem, IResourceshero } from "../../interfaces/contentrain";
 interface ResourcesSectionProps {
-  resources: ResourcesDataInterface;
-  resourcesItems: ResourcesItemsDataInterface[];
+  resources: IResourceshero;
+  resourcesItems: IResourcesItem[];
 }
 
 const ResourcesSection = ({

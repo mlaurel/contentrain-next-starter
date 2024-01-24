@@ -1,22 +1,12 @@
 // Import necessary dependencies
 import React from "react";
 import AppButton from "../../global/app-button";
+import { IHomeHero } from "../../../interfaces/contentrain";
 
-export interface HeroDataInterface {
-  title: string;
-  description: string;
-  imagesrc: string;
-  imagealt: string;
-  leftbuttonlabel: string;
-  leftbuttonlink: string;
-  rightbuttonlabel: string;
-  rightbuttonlink: string;
-}
 type Props = {
-  heroData: HeroDataInterface;
+  heroData: IHomeHero;
 
 }
-
 const Hero = ({ heroData } :Props) => {
   return (
     <section className="main-hero-bg py-10 md:pt-[160px] md:pb-[104px]">

@@ -1,25 +1,15 @@
-// components/MainHero.tsx
 
 import { ReactNode } from "react";
 import { useRouter } from "next/router";
 import ShareButtons from "../../../global/share-buttons";
-// import ShareButtons from "./ShareButtons";
+import { IBlogExtended } from "../../../../interfaces/contentrain";
 
-interface DetailData {
-  category: string;
-  title: string;
-  description: string;
-  authorphotosrc: string;
-  authorphotoalt: string;
-  authorfullname: string;
-  createdAt: string;
-}
 
 interface BlogDetailHeroProps {
-  detail: DetailData;
+  detail: IBlogExtended;
 }
 
-const BlogDetailHero = ({ detail }) => {
+const BlogDetailHero = ({ detail }:BlogDetailHeroProps) => {
   const router = useRouter();
   const shareUrl = router.asPath;
 
@@ -27,7 +17,7 @@ const BlogDetailHero = ({ detail }) => {
     <section className="main-hero-bg py-10 md:pt-[80px] mb-10">
       <div className="container flex flex-wrap justify-center text-center max-w-3xl">
         <span className="py-1.5 px-4 rounded-full bg-indigo-100 text-primary-700 font-medium text-sm capitalize">
-          {detail?.category}
+          {detail?.category.name}
         </span>
 
         <div className="w-full" />
@@ -49,13 +39,13 @@ const BlogDetailHero = ({ detail }) => {
                 height="64"
                 width="64"
                 className="h-full w-full object-cover"
-                src={detail?.authorphotosrc.split('public')[1]}
-                alt={detail?.authorphotoalt}
+                src={detail?.author.photosrc.split('public')[1]}
+                alt={detail?.author.photoalt}
               />
             </div>
             <div className="pl-2 text-left">
               <span className="block font-aeonik font-medium text-xl">
-                {detail?.authorfullname}
+                {detail?.author.fullname}
               </span>
               <span className="block text-gray-600 font-normal text-sm">
                 {new Date(detail?.createdAt).toDateString()}

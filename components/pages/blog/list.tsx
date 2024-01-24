@@ -3,27 +3,10 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Pagination from "../../global/pagination";
-
-interface BlogPost {
-  ID: string;
-  createdAt: string;
-  updatedAt: string;
-  status: string;
-  slug: string;
-  title: string;
-  description: string;
-  category: string;
-  imagesrc: string;
-  imagealt: string;
-  authorfullname: string;
-  authorjob: string;
-  authorphotosrc: string;
-  authorphotoalt: string;
-  authordescription: string;
-}
+import { IBlog, IBlogExtended } from "../../../interfaces/contentrain";
 
 type BlogPostsListProps = {
-  data: BlogPost[];
+  data: IBlogExtended[];
 }
 
 const BlogPostsList: React.FC<BlogPostsListProps> = ({ data }) => {
@@ -54,10 +37,10 @@ const BlogPostsList: React.FC<BlogPostsListProps> = ({ data }) => {
             key={post.slug}
             className="blog-card w-full md:w-1/3 px-2 pt-4 pb-12 group"
           >
-            <Link href={`/blog/${post.category.toLowerCase()}/${post.slug}`}>
+            <Link href={`/blog/${post.category.slug}/${post.slug}`}>
               <div className="w-full aspect-video rounded-lg overflow-hidden relative group-hover:shadow-[0_0_0_4px_rgba(59,130,246,0.40)]">
                 <span className="inline-block border border-gray:50 px-3 py-1 bg-white text-xs font-semibold rounded absolute top-5 left-5 capitalize">
-                  {post.category}
+                  {post.category.name}
                 </span>
                 <img className="object-contain" src={post.imagesrc.split('public')[1]} alt={post.imagealt} />
               </div>

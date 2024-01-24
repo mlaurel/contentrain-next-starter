@@ -1,6 +1,7 @@
 import fs from "fs";
 import { join } from "path";
 import matter from "gray-matter";
+import { IBlog, IBlogFields } from "../interfaces/contentrain";
 
 const baseMdDirectory = join(process.cwd(), "content");
 
@@ -8,40 +9,60 @@ export function getPostSlugs(postsDirectory: string) {
   return fs.readdirSync(postsDirectory);
 }
 
-export function getPostBySlug(slug: string, fields: string[] = []) {
+
+export function getPostBySlug(slug: string):IBlog {
+  
+  const fields:IBlogFields[] = [
+    "ID",
+    "createdAt",
+    "updatedAt",
+    "status",
+    "slug",
+    "title",
+    "description",
+    "category",
+    "imagesrc",
+    "imagealt",
+    "author",
+    "content",
+  ]
   const realSlug = slug.replace(/\.md$/, "");
   const fullPath = join(baseMdDirectory, `${realSlug}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
-
-  type Items = {
-    [key: string]: string;
+  const post: IBlog = {
+    ID: "",
+    status: "",
+    slug: "",
+    content: "",
+    createdAt: "",
+    updatedAt: "",
+    title: "",
+    description: "",
   };
-
-  const items: Items = {};
 
   // Ensure only the minimal needed data is exposed
   fields.forEach((field) => {
     if (field === "slug") {
-      items[field] = realSlug;
+      post[field] = realSlug;
     }
     if (field === "content") {
-      items[field] = content;
+      post[field] = content;
     }
 
     if (typeof data[field] !== "undefined") {
-      items[field] = data[field];
+      post[field] = data[field];
     }
   });
 
-  return items;
+  return post;
 }
 
-export function getAllPosts(fields: string[] = [], postsDirectory = "") {
+export function getAllPosts( postsDirectory = "") {
   const directory = join(baseMdDirectory, postsDirectory);
   const slugs = getPostSlugs(directory);
   const posts = slugs
-    .map((slug) => getPostBySlug(join(postsDirectory, slug) , fields))
+    .map((slug) => getPostBySlug(join(postsDirectory, slug)))
     .sort((post1, post2) => (post1.createdAt > post2.createdAt ? -1 : 1));
   return posts;
 }

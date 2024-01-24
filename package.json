@@ -4,7 +4,8 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "gen-types": "lib/contentrain-type-gen.ts"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.10",

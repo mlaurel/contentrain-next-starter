@@ -2,80 +2,34 @@
 import { useRouter } from "next/router";
 import { getAllPosts } from "../../lib/api";
 
+import BlogPostsList from "../../components/pages/blog/list";
+import BlogHero from "../../components/pages/blog/hero";
+import Layout from "../../components/global/layout";
+import ResourcesSection from "../../components/global/resources";
+
 // Import JSon's
 import blogHeroContent from "../../contentrain/bloghero/bloghero.json";
 import blogCategoriesContent from "../../contentrain/blogcategories/blogcategories.json";
 import resourceHeroContent from "../../contentrain/resourceshero/resourceshero.json";
 import resourceItemsContent from "../../contentrain/resourcesitems/resourcesitems.json";
-import BlogPostsList from "../../components/pages/blog/list";
-import BlogHero from "../../components/pages/blog/hero";
-import Layout from "../../components/global/layout";
-import ResourcesSection from "../../components/global/resources";
-export interface BlogPostInterface {
-  ID: string;
-  createdAt: string;
-  updatedAt: string;
-  status: string;
-  slug: string;
-  title: string;
-  description: string;
-  category: string;
-  imagesrc: string;
-  imagealt: string;
-  authorfullname: string;
-  authorjob: string;
-  authorphotosrc: string;
-  authorphotoalt: string;
-  authordescription: string;
-}
+import authorContent from "../../contentrain/authors/authors.json";
 
-export interface BlogHeroDataInterface {
-  ID: string;
-  createdAt: string;
-  updatedAt: string;
-  status: string;
-  title: string;
-  description: string;
-  imagesrc: string;
-  imagealt: string;
-  leftbuttonlabel: string;
-  leftbuttonlink: string;
-  rightbuttonlabel: string;
-  rightbuttonlink: string;
-}
-export interface BlogCategoriesDataInterface {
-  ID: string;
-  name: string;
-  link: string;
-  status: string;
-  updatedAt: string;
-  createdAt: string;
-}
-export interface ResourcesDataInterface {
-  ID: string;
-  createdAt: string;
-  updatedAt: string;
-  status: string;
-  title: string;
-  subtitle: string;
-}
-export interface ResourcesItemsDataInterface {
-  ID: string;
-  icon: string;
-  title: string;
-  link: string;
-  color: string;
-  createdAt: string;
-  updatedAt: string;
-}
 
-interface BlogProps {
-  resource: ResourcesDataInterface;
-  resourceItems: ResourcesItemsDataInterface[];
-  data: BlogPostInterface[]; // Update the type based on the actual data structure
-  blogHero: BlogHeroDataInterface;
-  blogCategories: BlogCategoriesDataInterface[];
-}
+import {
+  IBlogExtended,
+  IBlogCategories,
+  IBlogHero,
+  IResourceshero,
+  IResourcesItem,
+} from "../../interfaces/contentrain";
+
+type BlogProps = {
+  resource: IResourceshero;
+  resourceItems: IResourcesItem[];
+  data: IBlogExtended[]; // Update the type based on the actual data structure
+  blogHero: IBlogHero;
+  blogCategories: IBlogCategories[];
+};
 export default function Blog({
   resource,
   resourceItems,
@@ -105,46 +59,22 @@ export default function Blog({
     </>
   );
 }
-// export const getStaticPaths = async () => {
-//   const allPosts = getAllPosts(["slug", "category"], "blog");
-//   console.log(allPosts)
-//   return {
-//     paths: allPosts?.map((post) => {
-//       return {
-//         params: {
-//           slug: post.slug,
-//           category: post.category.toLowerCase(),
-//         },
-//       };
-//     }),
-//     fallback: false,
-//   };
-// }
+
+
 
 export const getStaticProps = async () => {
-  const allPosts = getAllPosts(
-    [
-      "ID",
-      "createdAt",
-      "updatedAt",
-      "status",
-      "slug",
-      "title",
-      "description",
-      "category",
-      "imagesrc",
-      "imagealt",
-      "authorfullname",
-      "authorjob",
-      "authorphotosrc",
-      "authorphotoalt",
-      "authordescription",
-    ],
-    "blog"
-  );
+  const allPosts = getAllPosts("blog");
+  const extendedPosts:IBlogExtended[] = allPosts.map((post) => {
+    return{
+      ...post,
+      category: blogCategoriesContent.find((category) => category.ID === post.category),
+      author: authorContent.find((author) => author.ID === post.author),
+    }
+  })
+    
   return {
     props: {
-      data: allPosts,
+      data: extendedPosts,
       resource: resourceHeroContent[0],
       resourceItems: resourceItemsContent,
       blogHero: blogHeroContent[0],

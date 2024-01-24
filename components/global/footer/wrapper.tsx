@@ -1,13 +1,13 @@
 // components/FooterWrapper.tsx
 
-import { FooterBannerData, FooterData, SocialLinksData } from "../layout";
+import { IFooter, IFooterBanner, ISocialLink } from "../../../interfaces/contentrain";
 import Logo from "../logo";
 import SocialLinks from "../social-links";
 import FooterBanner from "./banner";
 type Props = {
-  footerData: FooterData;
-  footerBannerData: FooterBannerData;
-  socialLinks: SocialLinksData[];
+  footerData: IFooter;
+  footerBannerData: IFooterBanner;
+  socialLinks: ISocialLink[];
 };
 
 const FooterWrapper = ({

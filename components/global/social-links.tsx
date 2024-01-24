@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { SocialLinksData } from "./layout";
+import { ISocialLink } from "../../interfaces/contentrain";
 
 type Props = {
-  socialLinks: SocialLinksData[];
+  socialLinks: ISocialLink[];
 };
 const SocialLinks = ({ socialLinks }: Props) => {
   return (

@@ -1,19 +1,11 @@
 import { ReactNode } from 'react';
 import AppButton from '../app-button';
 import Image from 'next/image';
+import { IFooterBanner } from '../../../interfaces/contentrain';
 
-interface FooterBannerDataInterface {
-  title: string;
-  logosrc: string;
-  logoalt: string;
-  leftbuttonlabel: string;
-  leftbuttonlink: string;
-  rightbuttonlabel: string;
-  rightbuttonlink: string;
-}
 
 interface FooterBannerProps {
-  footerBannerData: FooterBannerDataInterface;
+  footerBannerData: IFooterBanner;
   children?: ReactNode;
 }
 

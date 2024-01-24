@@ -1,17 +1,10 @@
 // components/FeaturesSection.tsx
 import { RiFile3Line } from "react-icons/ri"; 
 import AppButton from "../../global/app-button";
+import { IHomeFeatures } from "../../../interfaces/contentrain";
 
-export interface FeautersSectionDataInterface {
-  title: string;
-  ID: string;
-  icon: string;
-  description: string;
-  buttonlabel: string;
-  buttonlink: string;
-}
 type Props = {
-  featuresData: FeautersSectionDataInterface[];
+  featuresData: IHomeFeatures[];
 };
 
 const FeaturesSection = ({ featuresData }: Props) => {
