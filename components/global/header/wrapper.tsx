@@ -4,44 +4,41 @@ import AppButton from "../app-button";
 import Logo from "../logo";
 import Auth from "./auth";
 import HeaderNavWrapper from "./nav/wrapper";
-import useNavMenu from "../../../lib/useNavMenu";
 import { RiMenu3Line } from "react-icons/ri";
-import { HeaderData, NavigationItem, SocialLinksData } from "../layout";
-
+import {  useMenu } from "./nav-menu-content";
+import { IHeader, INavigationItem, ISocialLink } from "../../../interfaces/contentrain";
 type Props = {
-  headerData: HeaderData;
-  navigationItems: NavigationItem[];
-  socialLinks: SocialLinksData[];
+  headerData: IHeader;
+  navigationItems: INavigationItem[];
+  socialLinks: ISocialLink[];
 };
 
 const HeaderWrapper = ({ headerData, navigationItems, socialLinks }: Props) => {
-  const { show, setMenuShow } = useNavMenu();
+
+ const {setMenu} = useMenu()
   return (
-    <header className="flex">
-      <div className="container flex justify-between items-center !px-3">
-        <div>
-          <Logo logoSrc={headerData.logosrc} logoAlt={headerData.logoalt} />
+      <header className="flex">
+        <div className="container flex justify-between items-center !px-3">
+          <div>
+            <Logo logoSrc={headerData.logosrc} logoAlt={headerData.logoalt} />
+          </div>
+          <div>
+            <HeaderNavWrapper
+              navigationItemsData={navigationItems}
+              headerData={headerData}
+              socialLinks={socialLinks}
+            />
+          </div>
+          <div className="hidden lg:flex">
+            <Auth headerData={headerData} />
+          </div>
+          <div className="lg:hidden flex items-end">
+            <AppButton type="ghost" onClick={() => setMenu(true)}>
+              <RiMenu3Line size={20} />
+            </AppButton>
+          </div>
         </div>
-        <div>
-          <HeaderNavWrapper
-            navigationItemsData={navigationItems}
-            headerData={headerData}
-            socialLinks={socialLinks}
-          />
-        </div>
-        <div className="hidden lg:flex">
-          <Auth headerData={headerData} />
-        </div>
-        <div className="lg:hidden flex items-end">
-          <AppButton
-            type="ghost"
-            onClick={() => setMenuShow(!show)}
-          >
-            <RiMenu3Line size={20} />
-          </AppButton>
-        </div>
-      </div>
-    </header>
+      </header>
   );
 };
 

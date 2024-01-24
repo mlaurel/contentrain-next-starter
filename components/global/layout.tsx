@@ -9,56 +9,15 @@ import navigationContent from "../../contentrain/navigationitems/navigationitems
 import footerBannerContent from "../../contentrain/footerbanner/footerbanner.json";
 import footerContent from "../../contentrain/footer/footer.json";
 import socialLinksContent from "../../contentrain/sociallinks/sociallinks.json";
-// Types
-export interface HeaderData {
-  ID: string;
-  logosrc: string;
-  logoalt: string;
-  leftbuttonlabel: string;
-  leftbuttonlink: string;
-  rightbuttonlabel: string;
-  rightbuttonlink: string;
-  status: string;
-  updatedAt: string;
-}
-export interface NavigationItem {
-  ID: string;
-  name: string;
-  to?: string;
-}
-export interface FooterBannerData {
-  ID: string;
-  title: string;
-  status: string;
-  updatedAt: string;
-  logosrc: string;
-  logoalt: string;
-  leftbuttonlabel: string;
-  leftbuttonlink: string;
-  rightbuttonlabel: string;
-  rightbuttonlink: string;
-}
-export interface FooterData {
-  ID: string;
-  description: string;
-  status: string;
-  updatedAt: string;
-  logosrc: string;
-  logoalt: string;
-  leftbottomtext: string;
-  middlebottomtext: string;
-}
-export interface SocialLinksData {
-  ID: string;
-  name: string;
-  link: string;
-}
+import { IFooter, IFooterBanner, IHeader, INavigationItem, ISocialLink } from "../../interfaces/contentrain";
+
+
 type LayoutStaticContentType = {
-  headerData: HeaderData;
-  navigationItems: NavigationItem[];
-  footerBanner: FooterBannerData;
-  footerData: FooterData;
-  socialLinks: SocialLinksData[];
+  headerData: IHeader;
+  navigationItems: INavigationItem[];
+  footerBanner: IFooterBanner;
+  footerData: IFooter;
+  socialLinks: ISocialLink[];
 };
 type LayoutProps = {
   children: ReactNode;

@@ -1,9 +1,9 @@
 // components/MainNavbarList.tsx
 
-import { NavigationItem } from "../../../layout";
+import { INavigationItem } from "../../../../../interfaces/contentrain";
 import HeaderNavMenuItem from "./item";
 type Props = {
-  navItems: NavigationItem[];
+  navItems: INavigationItem[];
 };
 
 const NavMenuList = ({navItems}:Props) => {

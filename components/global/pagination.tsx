@@ -15,8 +15,6 @@ const Pagination: React.FC<PaginationProps> = ({
   totalPages,
   pagesToShow,
 }) => {
-  const router = useRouter();
-
   const displayedPages = (() => {
     const startPage = Math.max(1, currentPage - Math.floor(pagesToShow / 2));
     const endPage = Math.min(totalPages, startPage + pagesToShow - 1);

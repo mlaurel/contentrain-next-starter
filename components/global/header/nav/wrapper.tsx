@@ -1,18 +1,16 @@
 // components/HeaderNavWrapper.tsx
 
-import { useEffect } from "react";
 import AppButton from "../../app-button";
 import Auth from "../auth";
 import SocialLinks from "../../social-links";
-import useNavMenu from "../../../../lib/useNavMenu";
 import { RiCloseLine } from "react-icons/ri";
-import { HeaderData, NavigationItem, SocialLinksData } from "../../layout";
 import NavMenuList from "./menu/list";
-
+import { useMenu } from "../nav-menu-content";
+import { IHeader, INavigationItem, ISocialLink } from "../../../../interfaces/contentrain";
 type Props = {
-  navigationItemsData: NavigationItem[];
-  headerData: HeaderData;
-  socialLinks: SocialLinksData[];
+  navigationItemsData: INavigationItem[];
+  headerData: IHeader;
+  socialLinks: ISocialLink[];
 };
 
 const HeaderWrapper = ({
@@ -20,19 +18,16 @@ const HeaderWrapper = ({
   headerData,
   socialLinks,
 }: Props) => {
-  const { show, setMenuShow } = useNavMenu();
-  useEffect(() => {
-    console.log("show", show);
-  }, [show]);
+  const { setMenu, isMenuOpen } = useMenu();
 
   return (
-    <nav className={`main-navbar ${show ? "shown" : ""}`}>
-      <div className="flex justify-end self-start p-8 w-full lg:hidden">
+    <nav
+      className={`main-navbar ${isMenuOpen ? "shown" : ""}`}
+    >
+      <div className="flex justify-end self-start p-8 w-full lg:hidden py-3">
         <AppButton
           type="ghost"
-          className="py-3"
-          onClick={() => setMenuShow(false)}
-          label=""
+          onClick={() => setMenu(false)}
         >
           {<RiCloseLine className="text-md text-slate-400"></RiCloseLine>}
         </AppButton>

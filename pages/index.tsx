@@ -1,18 +1,11 @@
 import Head from "next/head";
 
 // Components
-import Hero, { HeroDataInterface } from "../components/pages/home/hero";
+import Hero from "../components/pages/home/hero";
 import Layout from "../components/global/layout";
-import FeaturesSection, {
-  FeautersSectionDataInterface,
-} from "../components/pages/home/features";
-import FeaturesOverviewSection, {
-  FeaturesOverviewData,
-  FeaturesOverviewItemsData,
-} from "../components/pages/home/features-overview";
-import ContentStructureSection, {
-  ContentStructureSectionDataInterface,
-} from "../components/pages/home/content-structure";
+import FeaturesSection from "../components/pages/home/features";
+import FeaturesOverviewSection from "../components/pages/home/features-overview";
+import ContentStructureSection from "../components/pages/home/content-structure";
 
 // Content Json's
 import heroContent from "../contentrain/homehero/homehero.json";
@@ -22,13 +15,22 @@ import featuresOverviewItems from "../contentrain/homefeaturesoverviewitems/home
 import contentStructureContent from "../contentrain/homecontentstructure/homecontentstructure.json";
 import collaborateTeamsContent from "../contentrain/homecollaborateteams/homecollaborateteams.json";
 
+import {
+  IHomeHero,
+  IHomeFeatures,
+  IHomeFeaturesOverview,
+  IHomeFeaturesOverviewItem,
+  IHomeContentStructure,
+  IHomeCollaborateTeam,
+} from "../interfaces/contentrain";
+
 type Props = {
-  heroData: HeroDataInterface;
-  featuresData: FeautersSectionDataInterface[];
-  featuresOverviewData: FeaturesOverviewData;
-  featuresOverviewItemsData: FeaturesOverviewItemsData[];
-  contentStructureData: ContentStructureSectionDataInterface;
-  collaborateTeamsData: ContentStructureSectionDataInterface;
+  heroData: IHomeHero;
+  featuresData: IHomeFeatures[];
+  featuresOverviewData: IHomeFeaturesOverview;
+  featuresOverviewItemsData: IHomeFeaturesOverviewItem[];
+  contentStructureData: IHomeContentStructure;
+  collaborateTeamsData: IHomeCollaborateTeam;
 };
 export default function Index({
   heroData,

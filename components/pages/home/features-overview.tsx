@@ -3,26 +3,12 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import AppButton from "../../global/app-button";
+import { IHomeFeaturesOverview, IHomeFeaturesOverviewItem } from "../../../interfaces/contentrain";
 
 
-export interface FeaturesOverviewData {
-  title: string;
-  subtitle: string;
-  description: string;
-  imagesrc: string;
-  imagealt: string;
-}
-export interface FeaturesOverviewItemsData {
-  title: string;
-  description: string;
-  imagesrc: string;
-  imagealt: string;
-  buttonlabel: string;
-  buttonlink: string;
-}
 type FeaturesOverviewSectionProps = {
-  featuresOverview: FeaturesOverviewData;
-  featuresOverviewItems: FeaturesOverviewItemsData[];
+  featuresOverview: IHomeFeaturesOverview;
+  featuresOverviewItems: IHomeFeaturesOverviewItem[];
 };
 
 const FeaturesOverviewSection = ({
@@ -85,7 +71,7 @@ const FeaturesOverviewSection = ({
                   ></AppButton>
                   <div className="border-t border-l border-r rounded-t-xl h-[230px] overflow-hidden mt-6">
                     <img
-                      src={item.imagesrc}
+                      src={item.imagesrc.split("public")[1]}
                       alt={item.imagealt}
                       height="200"
                       width="100%"
